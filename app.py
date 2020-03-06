@@ -11,6 +11,11 @@ model=pickle.load(open('taxi.pkl','rb'))
 @app.route('/')
 def home():
 	return render_template('index.html')
+@app.route('/request')
+def index(request):
+    r = requests.get('http://httpbin.org/status/418')
+    print(r.text)
+    return HttpResponse('<pre>' + r.text + '</pre>')
 
 @app.route('/predict',methods=['POST'])
 def predict():
